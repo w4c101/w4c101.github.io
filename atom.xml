@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[HoneyDM]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://honeydm.com/"/>
+  <updated>2016-01-18T10:12:03.356Z</updated>
+  <id>http://honeydm.com/</id>
+  
+  <author>
+    <name><![CDATA[Perry]]></name>
+    <email><![CDATA[perry.du.cn@gmail.com]]></email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Perry's 28th Birthday]]></title>
+    <link href="http://honeydm.com/2016/01/18/PerryBirthday/"/>
+    <id>http://honeydm.com/2016/01/18/PerryBirthday/</id>
+    <published>2016-01-18T07:06:00.000Z</published>
+    <updated>2016-01-18T10:12:03.356Z</updated>
+    <content type="html"><![CDATA[<h3 id="u5306_u5306_u90A3_u5E74"><a href="#u5306_u5306_u90A3_u5E74" class="headerlink" title="匆匆那年"></a>匆匆那年</h3><blockquote>
+<p>匆匆那年我们究竟说了几遍再见之后再拖延<br>可惜谁有没有爱过不是一场七情上面的雄辩<br>匆匆那年我们一时匆忙撂下难以承受的诺言<br>只有等别人兑现<br>不怪那吻痕还没积累成茧<br>拥抱着冬眠也没能羽化再成仙<br>不怪这一段情没空反复再排练<br>是岁月宽容恩赐反悔的时间</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="M_u4EB2_u624B_u505A_u7684_u6155_u65AF_u86CB_u7CD5"><a href="#M_u4EB2_u624B_u505A_u7684_u6155_u65AF_u86CB_u7CD5" class="headerlink" title="M亲手做的慕斯蛋糕"></a>M亲手做的慕斯蛋糕</h3><ul>
+<li>好吃</li>
+<li>超好吃</li>
+<li>超超好吃</li>
+<li>超超超好吃</li>
+</ul>
+<p><img src="http://honeydm.com/images/musi_1.jpg" alt=""><br><img src="http://honeydm.com/images/musi_2.jpg" alt=""></p>
+<h3 id="Google_u7684_u795D_u798F"><a href="#Google_u7684_u795D_u798F" class="headerlink" title="Google的祝福"></a>Google的祝福</h3><p><img src="http://honeydm.com/images/googlebir.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="u5306_u5306_u90A3_u5E74"><a href="#u5306_u5306_u90A3_u5E74" class="headerlink" title="匆匆那年"></a>匆匆那年</h3><blockquote>
+<p>匆匆那年我们究竟说了几遍再见之后再拖延<br>可惜谁有没有爱过不是一场七情上面的雄辩<br>匆匆那年我们一时匆忙撂下难以承受的诺言<br>只有等别人兑现<br>不怪那吻痕还没积累成茧<br>拥抱着冬眠也没能羽化再成仙<br>不怪这一段情没空反复再排练<br>是岁月宽容恩赐反悔的时间</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="Perry" scheme="http://honeydm.com/tags/Perry/"/>
+    
+      <category term="生日" scheme="http://honeydm.com/tags/%E7%94%9F%E6%97%A5/"/>
+    
+      <category term="生活记" scheme="http://honeydm.com/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[React Native环境搭建]]></title>
+    <link href="http://honeydm.com/2016/01/12/React-Native%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://honeydm.com/2016/01/12/React-Native环境搭建/</id>
+    <published>2016-01-12T11:07:00.000Z</published>
+    <updated>2016-01-18T03:48:02.680Z</updated>
+    <content type="html"><![CDATA[<h3 id="u65F6_u4EE3_u80CC_u666F"><a href="#u65F6_u4EE3_u80CC_u666F" class="headerlink" title="时代背景"></a>时代背景</h3><blockquote>
+<p>2015.03 React Native iOS 发布<br>2015.09 React Native Android 发布<br>APP中使用Hybrid已成为当前主流<br>有追求的APP Developer理应学习Facebook出品的React Native</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="u4ECE_u4F55_u800C_u6765"><a href="#u4ECE_u4F55_u800C_u6765" class="headerlink" title="从何而来"></a>从何而来</h3><p>本文参考：<a href="http://facebook.github.io/react-native/docs/getting-started.html" title="React Native Get Started" target="_blank" rel="external">React Native Get Started</a></p>
+<h3 id="u73AF_u5883_u8981_u6C42"><a href="#u73AF_u5883_u8981_u6C42" class="headerlink" title="环境要求"></a>环境要求</h3><ul>
+<li><strong>Mac OS X</strong>（有条件的最好使用Mac）</li>
+<li><strong>VPN</strong>，可以使用ShadowSocks。</li>
+<li><strong>HomeBrew</strong>，开发iOS的小伙伴肯定已经有了，没有的小伙伴请移步：<a href="http://brew.sh/" target="_blank" rel="external">HomeBrew官网</a></li>
+<li><p><strong>Node.js</strong>，请使用4.0以上的版本，<code>node -v</code>可以查看Node版本号，下载请至：<a href="https://nodejs.org/en/" target="_blank" rel="external">Node官网</a></p>
+<ol>
+<li>若使用多个node，可以使用nvm来切换node版本（使用）。</li>
+<li>如果使用的Node.js是5.0或更新的版本, 建议安装npm2. xxx版本，安装命令: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm@2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>watchman</strong>，官方建议安装，是Facebook的一个用于监控文件变更并触发指定操作的工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install watchman</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>flow</strong>，Flow 是一个 JavaScript 的静态类型检查器，建议安装它，以方便找出代码中可能存在的类型错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install flow</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>请仔细看清：</strong>官方文档用了一行很不起眼的文字写了这样一句话：<code>We recommend periodically running brew update &amp;&amp; brew upgrade to keep your programs up-to-date.</code><br>所以，我以一个过来人告诉大家，真的要时不时的运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew update &#38;&#38; brew upgrade</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="iOS__u57FA_u7840_u73AF_u5883"><a href="#iOS__u57FA_u7840_u73AF_u5883" class="headerlink" title="iOS 基础环境"></a>iOS 基础环境</h3><ul>
+<li><strong>XCode</strong>，至少7.0以上，你值得拥有。</li>
+<li><strong>CocoaPods</strong>，下载请至：<a href="http://cocoapods.org/" target="_blank" rel="external">官网</a>。</li>
+</ul>
+<h3 id="Android__u57FA_u7840_u73AF_u5883"><a href="#Android__u57FA_u7840_u73AF_u5883" class="headerlink" title="Android 基础环境"></a>Android 基础环境</h3><ul>
+<li><strong>AndroidStudio</strong>，下载请移步：<a href="http://developer.android.com/intl/zh-cn/sdk/index.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/sdk/index.html</a></li>
+<li><strong>Android SDK</strong>，这个比较大，需要耐心，且最好翻墙。</li>
+<li><strong>GenyMotion</strong>，这个是Android的模拟器，需要依赖<code>VirtualBox</code>，因为AS提供的模拟器不是很流畅，建议使用这个，不过有真机的话，可以忽略。</li>
+<li><strong>Gradle</strong>，Android编译会需要使用它，工程里一般都有gradlew，运行是会下载gradle最新版本。</li>
+</ul>
+<h3 id="u5B89_u88C5React_Native"><a href="#u5B89_u88C5React_Native" class="headerlink" title="安装React Native"></a>安装React Native</h3><p>运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g react-native-cli</span><br></pre></td></tr></table></figure></p>
+<p>这里简单介绍一下npm指令：</p>
+<ul>
+<li><code>-g</code> 参数，会将安装至全局，也就是/usr/local/bin下，若无此参数，会安装至当前执行命令的目录。</li>
+<li><code>-d</code> 参数，会将<code>npm install</code>的LOG打印至Console。</li>
+</ul>
+<h3 id="Qiuck_Start_uFF08_u6458_u81EAReact_Native_Get_Started_uFF09"><a href="#Qiuck_Start_uFF08_u6458_u81EAReact_Native_Get_Started_uFF09" class="headerlink" title="Qiuck Start（摘自React Native Get Started）"></a>Qiuck Start（摘自<a href="http://facebook.github.io/react-native/docs/getting-started.html" title="React Native Get Started" target="_blank" rel="external">React Native Get Started</a>）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ react-native init AwesomeProject</span><br></pre></td></tr></table></figure>
+<p>这个命令会初始化一个AwesomeProject的Project，它会需要一些时间，因为需要下载很多东西，比如：react-native。</p>
+<p><strong>To run the iOS app:</strong></p>
+<ul>
+<li>$ cd AwesomeProject</li>
+<li>Open ios/AwesomeProject.xcodeproj and hit run in Xcode.</li>
+<li>Open index.ios.js in your text editor of choice and edit some lines.</li>
+<li>Hit ⌘-R in your iOS simulator to reload the app and see your change!</li>
+</ul>
+<p><strong>To run the Android app:</strong></p>
+<ul>
+<li>$ cd AwesomeProject</li>
+<li>$ react-native run-android</li>
+<li>Open index.android.js in your text editor of choice and edit some lines.</li>
+<li>Press the menu button (F2 by default, or ⌘-M in Genymotion) and select Reload JS to see your change!</li>
+<li>Run adb logcat *:S ReactNative:V ReactNativeJS:V in a terminal to see your app’s logs</li>
+</ul>
+<p><strong>Notice：</strong></p>
+<ul>
+<li>运行以上例子，会从本地Server加载 js bundle。</li>
+<li>若需要运行在真机上，请查看文档：<a href="http://facebook.github.io/react-native/docs/running-on-device-ios.html" target="_blank" rel="external">iOS</a>，<a href="http://facebook.github.io/react-native/docs/running-on-device-android.html" target="_blank" rel="external">Android</a></li>
+<li>有疑问请留言</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="u65F6_u4EE3_u80CC_u666F"><a href="#u65F6_u4EE3_u80CC_u666F" class="headerlink" title="时代背景"></a>时代背景</h3><blockquote>
+<p>2015.03 React Native iOS 发布<br>2015.09 React Native Android 发布<br>APP中使用Hybrid已成为当前主流<br>有追求的APP Developer理应学习Facebook出品的React Native</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="React Native" scheme="http://honeydm.com/tags/React-Native/"/>
+    
+      <category term="环境搭建" scheme="http://honeydm.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+      <category term="React Native" scheme="http://honeydm.com/categories/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[首尔之行]]></title>
+    <link href="http://honeydm.com/2016/01/08/seoul/"/>
+    <id>http://honeydm.com/2016/01/08/seoul/</id>
+    <published>2016-01-08T05:14:00.000Z</published>
+    <updated>2016-01-18T08:59:27.718Z</updated>
+    <content type="html"><![CDATA[<p>@ (我的第一个笔记本，就从最近的首尔之旅开始吧~)</p>
+<h3 id="u65C5_u6E38_u524D_u5E8F"><a href="#u65C5_u6E38_u524D_u5E8F" class="headerlink" title="旅游前序"></a>旅游前序</h3><blockquote>
+<p>介于杜师傅晕机（麻袋留下的祸种），要求只能选择机程2小时内的地方，而且也没年假了，首尔成了首选思密达~<br>细数了一下，之前M（以下M都是我，哈哈~）和杜师傅出境游也只是蜜月去了趟麻袋，这次趁着途牛9周年做活动，挑了个首尔半自助游，真心是划算，就这么顺理成章的敲定了16年元旦假期，为期5天，去首尔看欧巴了~O(∩_∩)O~~</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shouer seoul haha</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p>@ (我的第一个笔记本，就从最近的首尔之旅开始吧~)</p>
+<h3 id="u65C5_u6E38_u524D_u5E8F"><a href="#u65C5_u6E38_u524D_u5E8F" class="headerlink" title="旅游前序"></a>旅游前序</h3><blockquote>
+<p>介于杜师傅晕机（麻袋留下的祸种），要求只能选择机程2小时内的地方，而且也没年假了，首尔成了首选思密达~<br>细数了一下，之前M（以下M都是我，哈哈~）和杜师傅出境游也只是蜜月去了趟麻袋，这次趁着途牛9周年做活动，挑了个首尔半自助游，真心是划算，就这么顺理成章的敲定了16年元旦假期，为期5天，去首尔看欧巴了~O(∩_∩)O~~</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="首尔" scheme="http://honeydm.com/tags/%E9%A6%96%E5%B0%94/"/>
+    
+      <category term="游记" scheme="http://honeydm.com/categories/%E6%B8%B8%E8%AE%B0/"/>
+    
+  </entry>
+  
+</feed>
