@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://honeydm.com/"/>
-  <updated>2016-01-18T10:12:03.356Z</updated>
+  <updated>2016-02-09T11:01:31.520Z</updated>
   <id>http://honeydm.com/</id>
   
   <author>
@@ -13,6 +13,23 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[上海动物园之行]]></title>
+    <link href="http://honeydm.com/2016/02/09/%E4%B8%8A%E6%B5%B7%E5%8A%A8%E7%89%A9%E5%9B%AD%E4%B9%8B%E8%A1%8C/"/>
+    <id>http://honeydm.com/2016/02/09/上海动物园之行/</id>
+    <published>2016-02-09T10:59:00.000Z</published>
+    <updated>2016-02-09T11:01:31.520Z</updated>
+    <content type="html"><![CDATA[<p>2016.2.9，带然然小同学到上海动物园游玩一整天~</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>2016.2.9，带然然小同学到上海动物园游玩一整天~</p>
+]]>
+    </summary>
+    
+      <category term="上海动物园" scheme="http://honeydm.com/tags/%E4%B8%8A%E6%B5%B7%E5%8A%A8%E7%89%A9%E5%9B%AD/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Perry's 28th Birthday]]></title>
