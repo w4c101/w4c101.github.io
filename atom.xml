@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>HoneyDM</title>
+  <title>w4c101</title>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="/"/>
-  <updated>2016-05-18T07:47:35.954Z</updated>
-  <id>/</id>
+  <link href="https://github.com/w4c101/"/>
+  <updated>2016-05-18T10:13:59.558Z</updated>
+  <id>https://github.com/w4c101/</id>
   
   <author>
     <name>w4c101</name>
@@ -16,17 +16,75 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="/2016/05/18/index/"/>
-    <id>/2016/05/18/index/</id>
-    <published>2016-05-18T07:47:35.954Z</published>
-    <updated>2016-05-18T07:47:35.954Z</updated>
+    <title>&quot;嫁了APP&quot; React Native 摸索之路</title>
+    <link href="https://github.com/w4c101/2016/05/18/perry/jiale-rn/"/>
+    <id>https://github.com/w4c101/2016/05/18/perry/jiale-rn/</id>
+    <published>2016-05-18T09:16:00.000Z</published>
+    <updated>2016-05-18T10:13:59.558Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;Welcome_to_W4c101&quot;&gt;&lt;a href=&quot;#Welcome_to_W4c101&quot; class=&quot;headerlink&quot; title=&quot;Welcome to W4c101&quot;&gt;&lt;/a&gt;Welcome to W4c101&lt;/h2&gt;</content>
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;程序不过是梦，&lt;br&gt;生于无形无象的禅中，&lt;br&gt;我们只是那做梦的人。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u540D_u8BCD_u91CA_u4E49&quot;&gt;&lt;a href=&quot;#u540D_u8BCD_u91CA_u4E49&quot; class=&quot;headerlink&quot; title=&quot;名词释义&quot;&gt;&lt;/a&gt;名词释义&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;RN：React Native&lt;/li&gt;
+&lt;li&gt;嫁了：嫁了App，由美团点评结婚团队倾力打造，专注于提供最in的结婚咨询~&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u5199_u5728_u524D_u9762&quot;&gt;&lt;a href=&quot;#u5199_u5728_u524D_u9762&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;经过一段时间的摸索，“嫁了”全面使用RN已经具备一些环境与条件。RN能给我们带来什么？我们为什么要选择RN？&lt;br&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;快速需求迭代，省去Apple及Android渠道审核时间&lt;/li&gt;
+&lt;li&gt;线上即时Bug Fix&lt;/li&gt;
+&lt;li&gt;试错成本大大降低&lt;/li&gt;
+&lt;li&gt;人力成本降低&lt;/li&gt;
+&lt;li&gt;APP端学习成本降低&lt;/li&gt;
+&lt;li&gt;性能不错，甚至有些优化不逊于Native&lt;/li&gt;
+&lt;li&gt;coder不必刻意关注性能的优化，只需负责好业务与逻辑&lt;/li&gt;
+&lt;li&gt;nmpjs.com上丰富的RN第三方库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不知道什么时候Apple就审核不过了&lt;/li&gt;
+&lt;li&gt;对iOS老手机(iphone4 &amp;amp; iphone4s)适配的不太理想&lt;/li&gt;
+&lt;li&gt;iOS JS调用Native Promise方式似乎不太稳定&lt;/li&gt;
+&lt;li&gt;Android jsc 不支持x64&lt;/li&gt;
+&lt;li&gt;系统要求：Android 4.1以上 &amp;amp;&amp;amp; iOS 7.0以上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;RN_u4E0ENative_u7684_u6027_u80FD_u5BF9_u6BD4&quot;&gt;&lt;a href=&quot;#RN_u4E0ENative_u7684_u6027_u80FD_u5BF9_u6BD4&quot; class=&quot;headerlink&quot; title=&quot;RN与Native的性能对比&quot;&gt;&lt;/a&gt;RN与Native的性能对比&lt;/h2&gt;&lt;p&gt;为了比较RN与Native的性能，我们使用RN完成了“嫁了”的首页编写，并从帧率、内存、CPU、过度绘制这四个方面，与现有的Native页面进行对比，结果如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;iOS：&lt;/strong&gt;&lt;br&gt;我们先来看看IOS的数据：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-47-54.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-47-6.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;从图中的数据上来看，RN的帧率始终接近60FPS，而Naitve的帧率相比于RN表现的略差。CPU的使用率RN比Native相比较高，但较为平稳。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Android：&lt;/strong&gt;&lt;br&gt;我们再来看看Android的数据：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-53-6.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-52-14.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;从图中可以看出，Android的GPU使用，RN基本低于60FPS的16ms刷新基准线以下，而Naitve的页面相对刷新时间较长，会偶尔超过30ms，这可能导致至少会掉2帧，造成用户视觉卡顿。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-56-53.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2016-58-38.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;从图中可以看出，RN的过度绘制显然比Native好很多，由于“嫁了”首页动画效果，阴影效果比较多，也影响了Native的过度绘制的区域。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2017-2-17.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2017-0-52.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;从图中可以看出，RN的CPU使用率比Native会高一些，但相对较为平稳。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;结论：&lt;/strong&gt;&lt;br&gt;RN在几个性能指标上表现的都很不错，而且我在使用RN写“嫁了”首页的时候，并没有刻意的去关注这些性能指标，而且Facebook的官方文档上，也有关于性能的一些优化建议，这使得程序员可以非常轻松的书写代码，并且只关注页面展示与业务逻辑。So，放心大胆的上吧~&lt;/p&gt;
+&lt;h2 id=&quot;u201C_u5AC1_u4E86_u201D_u6574_u4F53_u6846_u67B6&quot;&gt;&lt;a href=&quot;#u201C_u5AC1_u4E86_u201D_u6574_u4F53_u6846_u67B6&quot; class=&quot;headerlink&quot; title=&quot;“嫁了”整体框架&quot;&gt;&lt;/a&gt;“嫁了”整体框架&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-6%2017-14-37.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MAPI Fetch&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MAPI的支持已经成为“嫁了”是否能全面使用RN的重大突破点（点评App现有MAPI使用的是自定义数据结构，并且有序列化及加解密过程）。&lt;/li&gt;
+&lt;li&gt;MAPI兼容Web请求，返回JSON数据。&lt;/li&gt;
+&lt;li&gt;MAPI安全性问题：采用Https，为了保护数据不被串改，我们依赖TLS，这依然靠强大的IT在支持。&lt;/li&gt;
+&lt;li&gt;Cache：在未联网时，也能获取本地Cache的数据，这是区别web与native的关键所在，至少能在弱网络的情况下，返回一些Cache的数据，保持良好的用户体验。&lt;/li&gt;
+&lt;li&gt;Fetch，我们依靠它在js中获取数据，它很强大，强大到很有可能会覆灭Ajax，&lt;a href=&quot;https://fetch.spec.whatwg.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Fetch API&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot;&gt;&lt;a href=&quot;#RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot; class=&quot;headerlink&quot; title=&quot;RN的一些工具&quot;&gt;&lt;/a&gt;RN的一些工具&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;开发工具：&lt;/strong&gt;&lt;br&gt;Atom：可以安装react-native自动补全，css自动转换等插件包。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代码检测：&lt;/strong&gt;&lt;br&gt;eslint：我们使用它来确保代码风格的一致性，代码的严格检测。&lt;/p&gt;
+&lt;h2 id=&quot;u540E_u7EED_u5173_u6CE8&quot;&gt;&lt;a href=&quot;#u540E_u7EED_u5173_u6CE8&quot; class=&quot;headerlink&quot; title=&quot;后续关注&quot;&gt;&lt;/a&gt;后续关注&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Crash捕获&lt;/li&gt;
+&lt;li&gt;RN源码深入理解&lt;/li&gt;
+&lt;li&gt;RN集成sqlite&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u53C2_u8003_u8D44_u6599&quot;&gt;&lt;a href=&quot;#u53C2_u8003_u8D44_u6599&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://facebook.github.io/react-native/docs/getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://facebook.github.io/react-native/docs/getting-started.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://facebook.github.io/react/docs/getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://facebook.github.io/react/docs/getting-started.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://css-tricks.com/snippets/css/a-guide-to-flexbox/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://css-tricks.com/snippets/css/a-guide-to-flexbox/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://fetch.spec.whatwg.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://fetch.spec.whatwg.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://eslint.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://eslint.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Welcome_to_W4c101&quot;&gt;&lt;a href=&quot;#Welcome_to_W4c101&quot; class=&quot;headerlink&quot; title=&quot;Welcome to W4c101&quot;&gt;&lt;/a&gt;Welcome to W4c101&lt;/h2&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;程序不过是梦，&lt;br&gt;生于无形无象的禅中，&lt;br&gt;我们只是那做梦的人。&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
