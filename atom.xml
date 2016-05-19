@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/w4c101/"/>
-  <updated>2016-05-18T10:13:59.558Z</updated>
+  <updated>2016-05-19T06:30:16.052Z</updated>
   <id>https://github.com/w4c101/</id>
   
   <author>
@@ -16,11 +16,73 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>分布式异步调度框架Tiger</title>
+    <link href="https://github.com/w4c101/2016/05/19/tengkai/tiger/"/>
+    <id>https://github.com/w4c101/2016/05/19/tengkai/tiger/</id>
+    <published>2016-05-19T06:07:59.000Z</published>
+    <updated>2016-05-19T06:30:16.052Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;tiger&lt;/code&gt;是一种分布式异步调度框架，偏重于执行层面，同一种任务可以由多台机器同时执行，并能保证一条任务不被重复执行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;u80CC_u666F&quot;&gt;&lt;a href=&quot;#u80CC_u666F&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在后台，有很多业务场景需要定时处理一个任务，或在某件事情发生后处理一个任务。&lt;/p&gt;
+&lt;p&gt;比如，dw团队后台数据同步时，一般会每天凌晨某个时间点跑一次数据同步任务。这样的业务场景1(定时处理任务)，很适合quartz来处理，或点评内部的taurus平台。&lt;/p&gt;
+&lt;p&gt;有另外一种业务场景2(某个事件发生后触发处理任务)，比如你在12306上购买火车票提交订单后，系统会提示你在30分钟内完成支付，不然订单会被取消。针对这个情况，用quartz的定时任务方案也容易解决，只要开发一个quartz任务a每隔一段时间（比如每分钟）去轮询订单表，进行订单支付状态判断，如果未支付且时间已经超过30分钟，则将订单取消。&lt;/p&gt;
+&lt;p&gt;但是，如果12306有个新的功能，希望对购买且支付成功的乘客，在列车开车前1小时进行短信提醒，那按quartz的做法，就是再开发一个任务b去轮询订单信息表，对已支付的订单，且列车发车时间距当前时间小于1小时的，进行短信发送提醒。如果类似的附加任务越来越多，每次都需要开发一个定时任务去跑，任务就会变得越来越臃肿，越来越难以统一管理。而且，当任务数很多，一台机器处理不过来，需要多台机器同时处理时，任务的重复消费问题也开始体现出来。&lt;/p&gt;
+&lt;p&gt;为了解决上述问题，我们针对［业务场景2:&lt;strong&gt;一件事情发生后需要触发另一个事情&lt;/strong&gt;］的情况进行了抽象处理，提出一种&lt;strong&gt;基于事件驱动的分布式异步调度架构&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;u8BBE_u8BA1_u5B9E_u73B0_u539F_u7406&quot;&gt;&lt;a href=&quot;#u8BBE_u8BA1_u5B9E_u73B0_u539F_u7406&quot; class=&quot;headerlink&quot; title=&quot;设计实现原理&quot;&gt;&lt;/a&gt;设计实现原理&lt;/h2&gt;&lt;p&gt;&lt;code&gt;tiger&lt;/code&gt;是一种分布式异步调度框架，偏重于执行层面，同一种任务可以由多台机器同时执行，并能保证一条任务不被重复执行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tiger&lt;/code&gt;的设计目标：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于事件驱动，一件事情发生后能指定下一个要做的任务，且能指定什么时候执行；&lt;/li&gt;
+&lt;li&gt;高容错性，一个任务如果处理失败由任务本身来决定是否需要重新执行；&lt;/li&gt;
+&lt;li&gt;集群环境下，同一个任务保证只执行一次，不被重复执行；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于上述目标，&lt;code&gt;tiger&lt;/code&gt;主要有以下三部分组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;zk注册管理：用于管理应用机器的在线情况，进而对机器可执行的任务节点进行自适应分配，保证一个任务同一时间只会被一台机器消费；&lt;/li&gt;
+&lt;li&gt;事件调度管理：用于每隔一定时间触发一次任务执行，并监听任务执行器的配置情况，一旦发生变化，即停止任务执行，重新设置后再触发任务执行；&lt;/li&gt;
+&lt;li&gt;任务执行管理：用于管理本机所分配到的执行器节点，进而进行任务节点捞取、任务过滤等，并对任务的执行结果进行处理； &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;tiger的类结构如图：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-16%2017-57-2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;实现难点考虑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每一个任务的业务特性不一样，如何定义统一的业务参数；&lt;/li&gt;
+&lt;li&gt;线上有多台机器，如何保证一个任务只会被一台机器执行；&lt;/li&gt;
+&lt;li&gt;机器扩容或缩减时，在线的各个机器如何自适应分配各自能执行的任务，并保证不重复执行同一个任务；&lt;/li&gt;
+&lt;li&gt;针对业务参数，任务表的数据结构单独定义一个业务参数字段，约定为json格式；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;针对多台机器同时处理任务的情况，在任务生成时通过hash计算得到虚拟节点node，再由任务机器选择虚拟节点执行，这样能保证一个任务只会被其中一台任务机器执行。如图所示：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-16%2017-24-0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;当一个任务task0过来时，根据hash取模计算得到该任务由虚拟节点v0处理，而tiger应用任务机器m0正好负责虚拟节点v0,v1的任务处理，这样task0就由任务机器m0处理，而不会被m1,m2处理。例举结婚商户通合同处理的一个任务contractHandler，如下图：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-16%2017-28-27.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;当机器扩容或缩减时，为了能让在线的任务机器自适应分配可以处理的任务节点，引入zookeeper，任务机器一启动就注册到zk集群，进而做到任务机器对虚拟节点任务处理的自适应管理，如图所示：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-16%2017-31-42.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;比如，当机器1挂掉时，zookeeper就会通知到机器2、3，此时虚拟节点就会重新分配，机器2负责node:0,1,2，机器3负责node:3,4,5，保证即使机器1挂掉的情况下，落在虚拟节点0,1上的任务也能被快速处理，避免任务堆积。&lt;/p&gt;
+&lt;p&gt;到此为止，所述的任务执行基本都是并行处理的，业务上，也有任务需要按时间顺序串行处理的情况。&lt;/p&gt;
+&lt;p&gt;如结婚商户通的合同上下线处理，原合同的到期下线时间： 2015-08-31 23:59:59，此时在这个时间点会执行一条合同任务a进行下线；&lt;/p&gt;
+&lt;p&gt;由于该商户与点评合作很好，所以续签了一份新的合同，上线时间： 2015-09-01 00:00:00，这个时间会执行一条合同任务b将其上线；&lt;/p&gt;
+&lt;p&gt;由于tiger默认一次性会获取200条任务，并交给线程池并发处理，此时任务a和b会同时被执行，由于多线程不保证时间顺序，可能导致任务b先执行完，然后任务a再执行。那么业务上，该商户明明续签了，但系统还是对其进行了下线（以最后一次执行为准）。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，tiger的任务执行策略支持并行和串行两种策略，默认为并行处理。如图：&lt;br&gt;&lt;img src=&quot;http://o7d9mhc6g.bkt.clouddn.com/image2016-5-16%2017-50-58.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;如果期望某个任务按串行处理，那么需要在任务实现类里加上一个注解：@ExecuteType(AnnotationConstants.Executor.CHAIN)，比如婚宴的商户通合同处理按串行执行：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;annotation&quot;&gt;@ExecuteType&lt;/span&gt;(AnnotationConstants.Executor.CHAIN)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ChainTestHandler&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;DispatchHandler&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;annotation&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; DispatchResult &lt;span class=&quot;title&quot;&gt;invoke&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(DispatchParam param)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       Long taskId =  param.getTaskId();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       String jsonStr = param.getBizParameter();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       Map&amp;lt;String, String&amp;gt; paramMap = (Map&amp;lt;String, String&amp;gt;) JSON.parse(jsonStr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;tiger_u4F7F_u7528_u8BF4_u660E&quot;&gt;&lt;a href=&quot;#tiger_u4F7F_u7528_u8BF4_u660E&quot; class=&quot;headerlink&quot; title=&quot;tiger使用说明&quot;&gt;&lt;/a&gt;tiger使用说明&lt;/h2&gt;&lt;p&gt;回归到背景里提到的业务场景2，如果让tiger来处理，就会很方便。用户提交生成订单，此时插入一条［订单取消任务］，并指定执行时间30分钟后；用户订单支付成功后，此时插入一条［短信提醒任务］，并指定执行时间开车前1小时。在订单取消任务里判断订单是否已支付，如果已经支付成功，那么无需处理并返回，如果订单尚未支付，则执行订单取消逻辑；在短信提醒任务里，判断该订单状态是否有效（如果退款或改签），如果有效则发送短信提醒。&lt;br&gt;tiger适合任何的&lt;strong&gt;一件事情发生后需要触发另一个事情&lt;/strong&gt;的业务场景。&lt;/p&gt;
+&lt;p&gt;具体tiger的使用说明请前往公司code系统上搜索wed-tiger项目查看readme，或者联系本作者tengkai.yuan@dianping.com。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;tiger&lt;/code&gt;是一种分布式异步调度框架，偏重于执行层面，同一种任务可以由多台机器同时执行，并能保证一条任务不被重复执行。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>&quot;嫁了APP&quot; React Native 摸索之路</title>
     <link href="https://github.com/w4c101/2016/05/18/perry/jiale-rn/"/>
     <id>https://github.com/w4c101/2016/05/18/perry/jiale-rn/</id>
     <published>2016-05-18T09:16:00.000Z</published>
-    <updated>2016-05-18T10:13:59.558Z</updated>
+    <updated>2016-05-19T06:07:08.744Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;程序不过是梦，&lt;br&gt;生于无形无象的禅中，&lt;br&gt;我们只是那做梦的人。&lt;/p&gt;
@@ -64,7 +126,7 @@
 &lt;li&gt;Cache：在未联网时，也能获取本地Cache的数据，这是区别web与native的关键所在，至少能在弱网络的情况下，返回一些Cache的数据，保持良好的用户体验。&lt;/li&gt;
 &lt;li&gt;Fetch，我们依靠它在js中获取数据，它很强大，强大到很有可能会覆灭Ajax，&lt;a href=&quot;https://fetch.spec.whatwg.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Fetch API&lt;/a&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot;&gt;&lt;a href=&quot;#RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot; class=&quot;headerlink&quot; title=&quot;RN的一些工具&quot;&gt;&lt;/a&gt;RN的一些工具&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;开发工具：&lt;/strong&gt;&lt;br&gt;Atom：可以安装react-native自动补全，css自动转换等插件包。&lt;/p&gt;
+&lt;h2 id=&quot;RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot;&gt;&lt;a href=&quot;#RN_u7684_u4E00_u4E9B_u5DE5_u5177&quot; class=&quot;headerlink&quot; title=&quot;RN的一些工具&quot;&gt;&lt;/a&gt;RN的一些工具&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;开发工具：&lt;/strong&gt;&lt;br&gt;Atom：可以安装Nuclide，react-native自动补全，css自动转换等插件包。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;代码检测：&lt;/strong&gt;&lt;br&gt;eslint：我们使用它来确保代码风格的一致性，代码的严格检测。&lt;/p&gt;
 &lt;h2 id=&quot;u540E_u7EED_u5173_u6CE8&quot;&gt;&lt;a href=&quot;#u540E_u7EED_u5173_u6CE8&quot; class=&quot;headerlink&quot; title=&quot;后续关注&quot;&gt;&lt;/a&gt;后续关注&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Crash捕获&lt;/li&gt;
